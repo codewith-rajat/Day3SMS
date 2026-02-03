@@ -1,7 +1,10 @@
 package com.example.day3sms.controller;
 
+import com.example.day3sms.dto.StudentRequestDto;
+import com.example.day3sms.dto.StudentResponseDto;
 import com.example.day3sms.model.StudentModel;
 import com.example.day3sms.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
@@ -17,22 +20,22 @@ public class StudentController{
     // Create function API
 
     @PostMapping("/addstudent")
-    public StudentModel addStudent(@RequestBody StudentModel student){
+    public StudentResponseDto addStudent(@Valid @RequestBody StudentRequestDto student){
         return service.addStudent(student);
     }
 
     @GetMapping("/students")
-    public List<StudentModel> getStudents(){
+    public List<StudentResponseDto> getStudents(){
         return service.getStudents();
     }
 
     @GetMapping("/students/{id}")
-    public StudentModel getStudentById(@PathVariable String id){
+    public StudentResponseDto getStudentById(@PathVariable String id){
         return service.getStudentById(id);
     }
 
     @PutMapping("/update/{id}")
-    public StudentModel updateStudent(@PathVariable String id, @RequestBody StudentModel student){
+    public StudentResponseDto updateStudent(@PathVariable String id,@Valid  @RequestBody StudentRequestDto student){
         return service.updateStudent(id,student);
     }
 
